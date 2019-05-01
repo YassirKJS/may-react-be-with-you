@@ -11,13 +11,13 @@ const Search = (props) => {
       <input
             type="text"
             placeholder="Enter a search term"
-            onChange={e => onChange(e.target.value)}
+            onChange={e=>onChange(e.target.value)}
             value={value}
             autoFocus
         />
     </div>
   </div>
   );
-}
+};
 
 export default Search;
