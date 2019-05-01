@@ -42,8 +42,10 @@ function fetchAllItems(searchStr) {
     return Promise.all(urls.map(url => 
       fetch(url)))
         .then(response => response.json())
-      ))
-  }
+    ))
+    .then(array => prepareItems(array))
+    .then(json => dispatch(receiveItemsAction(searchStr, json)));
+  };
 }
 
 function prepareItems(array= {
