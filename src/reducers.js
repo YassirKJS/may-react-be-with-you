@@ -45,3 +45,8 @@ function items(state={
       return state;
   }
 }
+
+export default combinedReducers({
+  itemsBySearchStringReducer,
+  searchStrReducer,
+});
