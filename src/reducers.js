@@ -1,4 +1,4 @@
-import { combinedReducers } from 'redux';
+import { combineReducers } from 'redux';
 import {
   CHANGE_SEARCH_FIELD,
   REQUEST_ITEMS,
@@ -46,7 +46,7 @@ function items(state={
   }
 }
 
-export default combinedReducers({
+export default combineReducers({
   itemsBySearchStringReducer,
   searchStrReducer,
 });
