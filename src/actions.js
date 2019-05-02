@@ -20,7 +20,7 @@ function requestItemsAction(searchStr) {
 
 function receiveItemsAction(searchStr, items) {
   return {
-    type: RRECEIVE_ITEMS,
+    type: RECEIVE_ITEMS,
     searchStr,
     items,
     receivedAt: Date.now()
