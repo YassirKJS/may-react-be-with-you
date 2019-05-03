@@ -1,10 +1,12 @@
+import fetch from 'isomorphic-fetch';
+
 import {
   CHANGE_SEARCH_FIELD,
   REQUEST_ITEMS,
   RECEIVE_ITEMS
 } from './constants.js';
 
-const changeSearchFieldAction(searchStr) {
+function changeSearchFieldAction(searchStr) {
   return {
     type: CHANGE_SEARCH_FIELD,
     searchStr
@@ -40,7 +42,7 @@ function fetchAllItems(searchStr) {
     dispatch(changeSearchFieldAction(searchStr));
     dispatch(requestItemsAction(searchStr));
     return Promise.all(urls.map(url => 
-      fetch(url)))
+      fetch(url)
         .then(response => response.json())
     ))
     .then(array => prepareItems(array))
@@ -48,7 +50,7 @@ function fetchAllItems(searchStr) {
   };
 }
 
-function prepareItems(array= {
+function prepareItems(array) {
   let combined = [];
   array.forEach((item) => {
     combined = combined.concat(item.results);
@@ -97,7 +99,7 @@ function prepareItems(array= {
       mass: item.mass,
     };
   }).sort(compareNames);
-})
+}
 
 function compareNames(a, b) {
   if (a.name < b.name) {
@@ -107,4 +109,23 @@ function compareNames(a, b) {
     return 1;
   }
   return 0;
+}
+
+function shouldFetchItems(state, searchStr) {
+  const posts = state.itemsBySearchStringReducer[searchStr];
+  if (!posts) {
+    return true;
+  } else if (posts.isFetching) {
+    return false;
+  }
+  return false;
+}
+
+export function fetchItemsIfNeeded(searchStr) {
+  return (dispatch, getState) => {
+    if (shouldFetchItems(getState(), searchStr)) {
+      return dispatch(fetchAllItems(searchStr));
+    }
+    return dispatch(changeSearchFieldAction(searchStr));
+  };
 }

@@ -1,4 +1,4 @@
-import React for 'react';
+import React from 'react';
 
 const Loader = () => (
   <div className="loader">
