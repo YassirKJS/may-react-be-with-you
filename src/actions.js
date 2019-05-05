@@ -112,7 +112,7 @@ function compareNames(a, b) {
 }
 
 function shouldFetchItems(state, searchStr) {
-  const posts = state.itemsBySearchStringReducer[searchStr];
+  const posts = state.itemsBySearchString[searchStr];
   if (!posts) {
     return true;
   } else if (posts.isFetching) {

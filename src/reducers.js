@@ -5,8 +5,8 @@ import {
   RECEIVE_ITEMS
 } from './constants.js';
 
-function searchStrReducer(state='', action) {
-  switch(action.type) {
+function searchStr(state = '', action) {
+  switch (action.type) {
     case CHANGE_SEARCH_FIELD:
       return action.searchStr;
     default:
@@ -14,21 +14,10 @@ function searchStrReducer(state='', action) {
   }
 }
 
-function itemsBySearchStringReducer(state={}, action) {
-  switch(action.type) {
-    case RECEIVE_ITEMS:
-    case REQUEST_ITEMS:
-      return Object.assign({}, state, {
-        [action.searchStr]: items(state[action.searchStr], action),
-      });
-    default:
-      return state;
-  }
-}
-
-function items(state={
+function items(state = {
   isFetching: false,
   searchStr: '',
+  items: [],
 }, action) {
   switch (action.type) {
     case REQUEST_ITEMS:
@@ -46,7 +35,19 @@ function items(state={
   }
 }
 
+function itemsBySearchString(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_ITEMS:
+    case REQUEST_ITEMS:
+      return Object.assign({}, state, {
+        [action.searchStr]: items(state[action.searchStr], action),
+      });
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
-  itemsBySearchStringReducer,
-  searchStrReducer,
+  itemsBySearchString,
+  searchStr,
 });
