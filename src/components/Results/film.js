@@ -10,7 +10,6 @@ const Film = props => (
     <div
       className="results__bg"
       id={props.item.type}
-      dangerouslySetInnerHTML={{ __html: icon }}
     />
     <ul className="results__info">
       <li>Released <span>{props.item.release_date}</span> </li>

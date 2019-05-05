@@ -9,7 +9,6 @@ const Planet = props => (
     <div
       className="results__bg"
       id={props.item.type}
-      dangerouslySetInnerHTML={{ __html: icon }}
     />
     <ul className="results__info">
       <li>Terrain <span>{props.item.terrain}</span> </li>

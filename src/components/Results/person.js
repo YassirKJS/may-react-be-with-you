@@ -7,7 +7,6 @@ const Person = props => (
     <div
       className="results__bg"
       id={props.item.type}
-      dangerouslySetInnerHTML={{ __html: icon }}
     />
     <ul className="results__info">
       <li>Gender <span>{props.item.gender}</span></li>
